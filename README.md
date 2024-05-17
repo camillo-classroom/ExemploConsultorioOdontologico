@@ -41,3 +41,5 @@ Qual o risco do vazamento dos dados de nossos usuários se guardarmos as senhas 
 <strong>b)</strong> O problema do polimorfismo - dando o primeiro passo em direção à solução deste problema
 O controle do tipo do usuário no sistema, dependendo da forma que você efetuou, pode ter exigido uma série de comandos condicionais (IF’s). Você consegue pensar em alguma forma de criar o menu específico para cada usuário sem a necessidade de verificar o tipo do usuário que está logado com comandos condicionais?
 
+<h1>Até o momento, resolvemos apenas os exercícios 1 e 2</h1>
+<h1>Em breve, existirão mais exercícios nesta lista</h1>
