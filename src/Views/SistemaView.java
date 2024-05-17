@@ -1,6 +1,7 @@
-package Services;
+package Views;
 
 import Models.Usuario;
+import Services.UsuarioService;
 import Views.UsuarioView;
 
 import java.util.Scanner;
