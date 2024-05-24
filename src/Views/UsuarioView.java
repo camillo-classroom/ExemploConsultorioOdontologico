@@ -68,6 +68,7 @@ public class UsuarioView {
         System.out.println(" 2 - Inserir");
         System.out.println(" 3 - Alterar");
         System.out.println(" 4 - Excluir");
+        System.out.println(" 5 - Resetar a Senha");
         System.out.print("Opção: ");
 
         boolean continuar;
@@ -91,10 +92,33 @@ public class UsuarioView {
                 case 4:
                     excluir();
                     break;
+                case 5:
+                    resetarSenha();
+                    break;
                 default:
                     continuar = true;
             }
         } while (continuar);
+    }
+
+    private static void resetarSenha() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("E-mail do(a) usuário(a) a ser alterado(a): ");
+        String email = sc.nextLine();
+        UsuarioService servico = new UsuarioService();
+
+        Usuario usuario = servico.getUsuarioPorEmail(email);
+
+        if (usuario == null) {
+            System.out.println("Usuário não encontrado");
+            return;
+        }
+
+        usuario.setSenha("usu@rio123");
+        usuario.setPrimeiroLogin(true);
+
+        System.out.println("A senha foi alterada para 'usu@rio123' e deve ser trocada no próximo login.");
     }
 
     private static void listar() {
