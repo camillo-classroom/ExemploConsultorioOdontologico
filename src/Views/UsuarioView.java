@@ -1,4 +1,7 @@
 package Views;
+import Models.Administrador;
+import Models.Dentista;
+import Models.Secretario;
 import Models.Usuario;
 import Services.UsuarioService;
 import java.util.Scanner;
@@ -56,6 +59,154 @@ public class UsuarioView {
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
+        }
+    }
+
+    public static void apresentarMenu() {
+        System.out.println("Menu de usuários (escolha uma opção):");
+        System.out.println(" 1 - Listar");
+        System.out.println(" 2 - Inserir");
+        System.out.println(" 3 - Alterar");
+        System.out.println(" 4 - Excluir");
+        System.out.print("Opção: ");
+
+        boolean continuar;
+
+        do {
+            continuar = false;
+
+            Scanner sc = new Scanner(System.in);
+            int opcao = sc.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    listar();
+                    break;
+                case 2:
+                    inserir();
+                    break;
+                case 3:
+                    alterar();
+                    break;
+                case 4:
+                    excluir();
+                    break;
+                default:
+                    continuar = true;
+            }
+        } while (continuar);
+    }
+
+    private static void listar() {
+        UsuarioService servico = new UsuarioService();
+
+        System.out.println("\nLista de Usuários do Sistema:");
+
+        for (Usuario usr: servico.getUsuarios()) {
+            System.out.printf("%s - %s - %s\n", usr.getNome(), usr.getEmail(), usr.getTelefone());
+        }
+
+        System.out.println("-----------------------------\n");
+    }
+
+    private static void inserir() {
+        System.out.println("\nInserindo Usuário:");
+        Usuario usuario = lerComBaseEmTipo();
+        UsuarioService servico = new UsuarioService();
+        servico.inserir(usuario);
+    }
+
+    private static Usuario lerComBaseEmTipo() {
+        int tipo;
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Tipo de usuário (1 - Dentista, 2 - Secretário(a), 3 - Administrador(a): ");
+            tipo = sc.nextInt();
+
+            switch (tipo) {
+                case 1:
+                    Dentista dentista = new Dentista();
+                    lerUsuario(dentista);
+                    lerDentista(dentista);
+                    return dentista;
+                case 2:
+                    Secretario secretario = new Secretario();
+                    lerUsuario(secretario);
+                    return secretario;
+                case 3:
+                    Administrador administrador = new Administrador();
+                    lerUsuario(administrador);
+                    return administrador;
+                default:
+                    System.out.println("Tipo de usuário inválido!");
+            }
+        }
+    }
+
+    private static void lerDentista(Dentista dentista) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("  Número do CRO: ");
+        dentista.setNumeroCro(sc.nextLine());
+    }
+
+    private static void lerUsuario(Usuario usuario) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("  Nome: ");
+        usuario.setNome(sc.nextLine());
+        System.out.print("  E-mail: ");
+        usuario.setEmail(sc.nextLine());
+        System.out.print("  Telefone: ");
+        usuario.setTelefone(sc.nextLine());
+    }
+
+    private static void alterar() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("E-mail do(a) usuário(a) a ser alterado(a): ");
+        String email = sc.nextLine();
+        UsuarioService servico = new UsuarioService();
+
+        Usuario usuario = servico.getUsuarioPorEmail(email);
+
+        if (usuario == null) {
+            System.out.println("Usuário não encontrado");
+            return;
+        }
+
+        System.out.print("  Nome: ");
+        usuario.setNome(sc.nextLine());
+        System.out.print("  Telefone: ");
+        usuario.setTelefone(sc.nextLine());
+
+        try {
+            servico.alterar(usuario);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private static void excluir() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("E-mail do(a) usuário(a) a ser excluído(a): ");
+        String email = sc.nextLine();
+        UsuarioService servico = new UsuarioService();
+
+        Usuario usuario = servico.getUsuarioPorEmail(email);
+
+        if (usuario == null) {
+            System.out.println("Usuário não encontrado");
+            return;
+        }
+
+        try {
+            servico.excluir(usuario.getEmail());
+            System.out.println("Usuário(a) excluído(a) com sucesso!");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

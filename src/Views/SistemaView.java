@@ -1,5 +1,6 @@
 package Views;
 
+import Models.Administrador;
 import Models.Usuario;
 import Services.UsuarioService;
 import Views.UsuarioView;
@@ -36,6 +37,11 @@ public class SistemaView {
         System.out.println("Menu (escolha a opção desejada):");
         System.out.println(" 0 - Sair");
         System.out.println(" 1 - Logout");
+
+        if (usuarioLogado instanceof Administrador) {
+            System.out.println(" 9 - Usuários");
+        }
+
         System.out.print(" Opção: ");
         int opcao = sc.nextInt();
 
@@ -46,6 +52,9 @@ public class SistemaView {
                 case 1:
                     UsuarioService servico = new UsuarioService();
                     servico.logout();
+                    return true;
+                case 9:
+                    UsuarioView.apresentarMenu();
                     return true;
                 default:
                     System.out.println(" Opção inválida!");
