@@ -44,4 +44,9 @@ O controle do tipo do usuário no sistema, dependendo da forma que você efetuou
 <h3>QUESTÃO 6)</h3>
 Faça o CRUD (Create Read Update Delete) de pacientes. Um paciente possui nome, e-mail e telefone. Apenas usuários do tipo 'Secretario' e 'Administrador' podem cadastrar pacientes.
 
+<h3>QUESTÃO 7)</h3>
+Crie as agendas para cada dentista. Um usuário do tipo 'Dentista' deve conseguir acessar somente a própria agenda. Um usuário do tipo 'Secretario' pode acessar a agenda de qualquer dentista. A agenda deve permitir agendar consultas e compromissos externos. Consultas devem estar associadas a um determinado paciente.
+
+
+
 

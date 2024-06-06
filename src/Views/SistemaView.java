@@ -42,6 +42,11 @@ public class SistemaView {
 
         if (usuarioLogado instanceof Secretario) {
             System.out.println(" 2 - Pacientes");
+            System.out.println(" 8 - Agenda2");
+        }
+
+        if (usuarioLogado instanceof Dentista) {
+            System.out.println(" 7 - Agenda");
         }
 
         if (usuarioLogado instanceof Administrador) {
@@ -62,6 +67,12 @@ public class SistemaView {
                     return true;
                 case 2:
                     PacienteView.apresentarMenu();
+                    return true;
+                case 7:
+                    AgendaView.apresentarMenuUsuarioLogado();
+                    return true;
+                case 8:
+                    AgendaView.apresentarMenu();
                     return true;
                 case 9:
                     UsuarioView.apresentarMenu();
