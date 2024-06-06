@@ -1,6 +1,7 @@
 package State;
 
 import Models.Administrador;
+import Models.Paciente;
 import Models.Usuario;
 
 import java.util.ArrayList;
@@ -18,6 +19,10 @@ public class Dados {
         return usuarios;
     }
 
+    public static ArrayList<Paciente> getPacientes() {
+        return pacientes;
+    }
+
     public static Usuario getUsuarioLogado() {
         return usuarioLogado;
     }
@@ -29,4 +34,5 @@ public class Dados {
     private static Usuario usuarioLogado = null;
 
     private static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    private static ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 }

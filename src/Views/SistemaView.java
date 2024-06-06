@@ -1,6 +1,8 @@
 package Views;
 
 import Models.Administrador;
+import Models.Dentista;
+import Models.Secretario;
 import Models.Usuario;
 import Services.UsuarioService;
 import Views.UsuarioView;
@@ -38,7 +40,12 @@ public class SistemaView {
         System.out.println(" 0 - Sair");
         System.out.println(" 1 - Logout");
 
+        if (usuarioLogado instanceof Secretario) {
+            System.out.println(" 2 - Pacientes");
+        }
+
         if (usuarioLogado instanceof Administrador) {
+            System.out.println(" 2 - Pacientes");
             System.out.println(" 9 - Usuários");
         }
 
@@ -52,6 +59,9 @@ public class SistemaView {
                 case 1:
                     UsuarioService servico = new UsuarioService();
                     servico.logout();
+                    return true;
+                case 2:
+                    PacienteView.apresentarMenu();
                     return true;
                 case 9:
                     UsuarioView.apresentarMenu();
